@@ -2,12 +2,13 @@ Vue.createApp({
   data() {
     return {
       aircraftList: [
-        {id: 0, name: 'Paramotor', checklistItems: ['Check fuel']},
-        {id: 1, name: 'Paraglider', checklistItems: ['Clear lines']},
-        {id: 2, name: 'Cessna 172', checklistItems: ['Check fuel']},
+        {id: 0, name: 'Paramotor', checklistItems: [{id: 0, name: 'Check fuel', completed: false}, {id: 1, name: 'Inspect Propeller', completed: false},]},
+        {id: 1, name: 'Paraglider', checklistItems: [{id: 0, name: 'Clear lines', completed: false}]},
+        {id: 2, name: 'Cessna 172', checklistItems: [{id: 0, name: 'Check fuel', completed: false}]},
       ],
-      somethingSelected: false,
-      selected: {},
+      somethingSelected: true, //RETURN TO FALSE FOR DEFAULT!!!
+      selected: {id: 0, name: 'Paramotor', checklistItems: [{id: 0, name:'Check fuel', completed: false},{id: 1, name: 'Inspect Propeller', completed: false}]}, //RETURN TO EMPTY OBJECT FOR DEFAULT!!!
+      newItemFormDisplayed: false,
     }
   },
   methods: {
@@ -19,7 +20,14 @@ Vue.createApp({
       this.aircraftList.push(newCraft)
       this.somethingSelected = false;
       this.selected = {};
-    }
+    },
+    markCompleted(id) {
+      this.selected.checklistItems[id].completed = !this.selected.checklistItems[id].completed;
+      console.log(id)
+    },
+    revealNewItemForm() {
+      this.newItemFormDisplayed = true;
+    },
 
   }
 })
@@ -30,6 +38,13 @@ Vue.createApp({
     aircraftList: {type: Array, required: true},
     somethingSelected: {type: Boolean, required: true},
     selected: {type: Object, required: true},
+    
+  },
+  methods: {
+    toggleCompleted(id) { //NEED TO EMIT?
+      console.log(id)
+      this.$emit('item-completed', id)
+    }
   }
 })
 

@@ -25,6 +25,8 @@ body {
   display: flex;
   justify-content: space-between;
   border-bottom: 3px solid var(--borderColor);
+  padding-left: 4%;
+  font-weight: 900;
 }
 
 #sidebar {
@@ -58,8 +60,26 @@ body {
 }
 
 #content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   grid-area: content;
   background-color: var(--contentColor);
+}
+
+#checklistCard {
+  border: 1px solid var(--borderColor);
+  padding: 5%;
+  background-color: var(--headerColor);
+}
+
+.checklistTitle {
+  font-weight: 800;
+}
+
+.checklistItemCompleted {
+  text-decoration: line-through;
+  color: rgb(185, 185, 185)
 }
 
 
