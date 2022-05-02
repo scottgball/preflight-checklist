@@ -8,8 +8,8 @@ Vue.createApp({
       ],
       newCraft: {id: null, name: '', checklistItems: []},
       newCraftFormDisplayed: false,
-      somethingSelected: true, //RETURN TO FALSE FOR DEFAULT!!!
-      selected: {id: 0, name: 'Paramotor', checklistItems: [{id: 0, name:'Check fuel', completed: false},{id: 1, name: 'Inspect Propeller', completed: false}]}, //RETURN TO EMPTY OBJECT FOR DEFAULT!!!
+      somethingSelected: false, //RETURN TO FALSE FOR DEFAULT!!!
+      selected: {}, //RETURN TO EMPTY OBJECT FOR DEFAULT!!!
       newItemFormDisplayed: false,
       newItem: {id: null, name: '', completed: false},
     }
@@ -18,6 +18,7 @@ Vue.createApp({
     selectCraft(craft) {
       this.selected = craft;
       this.somethingSelected = true;
+      this.newItemFormDisplayed = false;
     },
     toggleNewCraftForm() {
       this.newCraftFormDisplayed = !this.newCraftFormDisplayed
