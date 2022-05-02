@@ -17,7 +17,16 @@
       </div> 
       <div id="content"> <!--Displays checklist for selected aircraft with ability to add/edit/checkoff items-->
 
-         <aircraft-display :selected="selected" :aircraft-list="aircraftList" :something-selected="somethingSelected" @item-completed="markCompleted"></aircraft-display>
+         <aircraft-display :selected="selected" :aircraft-list="aircraftList" :something-selected="somethingSelected" @item-completed="markCompleted" @toggle-item-form="toggleItemForm"></aircraft-display>
+        
+         <div :class="[newItemFormDisplayed ? 'newItemFormActive' : 'newItemFormHidden']">
+          <form id="newItemForm">
+            <label>New Checklist Item
+             <input type="text" v-model="newItem.name">
+            </label>
+            <button @click.prevent="addNewItem">Add Item</button>
+          </form>
+         </div>
        
       </div>
     </div>
@@ -28,7 +37,7 @@
   <script type="text/x-template" id="aircraft-display-template">
     <div id="checklistCard" v-if="somethingSelected">
       <div class="checklistTitle" >Preflight checklist for your {{selected.name}}:</div>
-      <button @click:"revealNewItemForm">+ Add Item</button>
+      <button @click="toggleNewItemForm">+ Add Item</button>
       <div class="checklistItem" v-for="item in selected.checklistItems" :key="item.id" :class="{checklistItemCompleted: item.completed}"> <!--Need to target specific checklist item to toggle completed?-->
         <input type="checkbox" @click="toggleCompleted(item.id)">
         {{item.name}}</div>

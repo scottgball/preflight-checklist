@@ -82,4 +82,12 @@ body {
   color: rgb(185, 185, 185)
 }
 
+.newItemFormActive {
+  visibility: visible
+}
+
+.newItemFormHidden {
+  visibility: hidden;
+}
+
 

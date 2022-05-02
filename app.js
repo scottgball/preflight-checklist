@@ -9,6 +9,7 @@ Vue.createApp({
       somethingSelected: true, //RETURN TO FALSE FOR DEFAULT!!!
       selected: {id: 0, name: 'Paramotor', checklistItems: [{id: 0, name:'Check fuel', completed: false},{id: 1, name: 'Inspect Propeller', completed: false}]}, //RETURN TO EMPTY OBJECT FOR DEFAULT!!!
       newItemFormDisplayed: false,
+      newItem: {id: null, name: '', completed: false},
     }
   },
   methods: {
@@ -25,9 +26,14 @@ Vue.createApp({
       this.selected.checklistItems[id].completed = !this.selected.checklistItems[id].completed;
       console.log(id)
     },
-    revealNewItemForm() {
-      this.newItemFormDisplayed = true;
+    toggleItemForm() {
+      this.newItemFormDisplayed = !this.newItemFormDisplayed;
     },
+    addNewItem() {
+      this.newItem.id = this.selected.checklistItems.length;
+      this.selected.checklistItems.push(this.newItem);
+      this.newItem = {id: null, name: '', completed: false}
+    }
 
   }
 })
@@ -37,13 +43,15 @@ Vue.createApp({
   props: {
     aircraftList: {type: Array, required: true},
     somethingSelected: {type: Boolean, required: true},
-    selected: {type: Object, required: true},
-    
+    selected: {type: Object, required: true}
   },
   methods: {
     toggleCompleted(id) { //NEED TO EMIT?
       console.log(id)
       this.$emit('item-completed', id)
+    },
+    toggleNewItemForm() {
+      this.$emit('toggle-item-form')
     }
   }
 })
