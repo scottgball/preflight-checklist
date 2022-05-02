@@ -6,6 +6,8 @@ Vue.createApp({
         {id: 1, name: 'Paraglider', checklistItems: [{id: 0, name: 'Clear lines', completed: false}]},
         {id: 2, name: 'Cessna 172', checklistItems: [{id: 0, name: 'Check fuel', completed: false}]},
       ],
+      newCraft: {id: null, name: '', checklistItems: []},
+      newCraftFormDisplayed: false,
       somethingSelected: true, //RETURN TO FALSE FOR DEFAULT!!!
       selected: {id: 0, name: 'Paramotor', checklistItems: [{id: 0, name:'Check fuel', completed: false},{id: 1, name: 'Inspect Propeller', completed: false}]}, //RETURN TO EMPTY OBJECT FOR DEFAULT!!!
       newItemFormDisplayed: false,
@@ -17,10 +19,15 @@ Vue.createApp({
       this.selected = craft;
       this.somethingSelected = true;
     },
-    addCraft(newCraft) {  //ADD FORM FOR NEW AIRCRAFT BUTTON
-      this.aircraftList.push(newCraft)
-      this.somethingSelected = false;
-      this.selected = {};
+    toggleNewCraftForm() {
+      this.newCraftFormDisplayed = !this.newCraftFormDisplayed
+    },
+    addNewCraft() {  //ADD FORM FOR NEW AIRCRAFT BUTTON
+      this.newCraft.id = this.aircraftList.length;
+      this.aircraftList.push(this.newCraft);
+      this.somethingSelected = true;
+      this.selected = this.newCraft;
+      this.newCraftFormDisplayed = false;
     },
     markCompleted(id) {
       this.selected.checklistItems[id].completed = !this.selected.checklistItems[id].completed;

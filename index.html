@@ -11,13 +11,23 @@
       </div> 
       <div id="sidebar"> <!--Displays user-generated list of aircraft-->
         <div id="sidebarList">
-          <button class="sidebarButton addButton" @click="addCraft">Add New Aircraft</button>
+          <button class="sidebarButton addButton" @click="toggleNewCraftForm">Add New Aircraft</button>
           <button v-for="craft in aircraftList" class="sidebarButton aircraftButton" :key="craft.id" @click="selectCraft(craft)">{{craft.name}}</button>
         </div>
       </div> 
       <div id="content"> <!--Displays checklist for selected aircraft with ability to add/edit/checkoff items-->
 
-         <aircraft-display :selected="selected" :aircraft-list="aircraftList" :something-selected="somethingSelected" @item-completed="markCompleted" @toggle-item-form="toggleItemForm"></aircraft-display>
+        <div :class="[newCraftFormDisplayed ? 'newCraftFormActive' : 'newCraftFormHidden']">
+          <form id="newCraftForm">
+            <label>Add New Aircraft
+             <input type="text" v-model="newCraft.name">
+            </label>
+            <button @click.prevent="addNewCraft">Add Aircraft</button>
+          </form>
+         </div>
+        
+        
+        <aircraft-display :selected="selected" :aircraft-list="aircraftList" :something-selected="somethingSelected" @item-completed="markCompleted" @toggle-item-form="toggleItemForm"></aircraft-display>
         
          <div :class="[newItemFormDisplayed ? 'newItemFormActive' : 'newItemFormHidden']">
           <form id="newItemForm">
@@ -37,7 +47,7 @@
   <script type="text/x-template" id="aircraft-display-template">
     <div id="checklistCard" v-if="somethingSelected">
       <div class="checklistTitle" >Preflight checklist for your {{selected.name}}:</div>
-      <button @click="toggleNewItemForm">+ Add Item</button>
+      <button @click="toggleNewItemForm">+ Add Items</button>
       <div class="checklistItem" v-for="item in selected.checklistItems" :key="item.id" :class="{checklistItemCompleted: item.completed}"> <!--Need to target specific checklist item to toggle completed?-->
         <input type="checkbox" @click="toggleCompleted(item.id)">
         {{item.name}}</div>

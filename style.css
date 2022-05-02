@@ -73,6 +73,14 @@ body {
   background-color: var(--headerColor);
 }
 
+.newCraftFormActive {
+ visibility: visible;
+}
+
+.newCraftFormHidden {
+  visibility: hidden;
+}
+
 .checklistTitle {
   font-weight: 800;
 }
