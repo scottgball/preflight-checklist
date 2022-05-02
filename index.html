@@ -16,13 +16,22 @@
         </div>
       </div> 
       <div id="content"> <!--Displays checklist for selected aircraft with ability to add/edit/checkoff items-->
-        <div id="checklistCard">
-          <div v-if="somethingSelected">Preflight checklist for your {{selected.name}}:</div>
-          <div v-for="item in selected.checklistItems">{{item}}</div> 
-       </div>
+
+         <aircraft-display :selected="selected" :aircraft-list="aircraftList" :something-selected="somethingSelected"></aircraft-display>
+       
       </div>
     </div>
 
+
+
+
+  <script type="text/x-template" id="aircraft-display-template">
+    <div id="checklistCard">
+      <div v-if="somethingSelected">Preflight checklist for your {{selected.name}}:</div>
+      <div v-for="item in selected.checklistItems">{{item}}</div>
+    </div>
+
+  </script> 
 
 
 

@@ -24,6 +24,15 @@ Vue.createApp({
   }
 })
 
+.component('AircraftDisplay', {
+  template: '#aircraft-display-template',
+  props: {
+    aircraftList: {type: Array, required: true},
+    somethingSelected: {type: Boolean, required: true},
+    selected: {type: Object, required: true},
+  }
+})
+
 
 
 
