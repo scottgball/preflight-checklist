@@ -26,7 +26,7 @@
           </form>
         </div>
         
-        <aircraft-display :selected="selected" :aircraft-list="aircraftList" :something-selected="somethingSelected" @item-completed="markCompleted" @toggle-item-form="toggleItemForm"></aircraft-display>
+        <aircraft-display :selected="selected" :aircraft-list="aircraftList" :something-selected="somethingSelected" @item-completed="markCompleted" @toggle-item-form="toggleItemForm"></aircraft-display> <!--Vuejs component-->
         
          <div :class="[newItemFormDisplayed ? 'newItemFormActive' : 'newItemFormHidden']">  <!--Form for creating new checklist item-->
           <form id="newItemForm">
@@ -41,18 +41,14 @@
       </div>
     </div>
 
-
-
-
-  <script type="text/x-template" id="aircraft-display-template">
+  <script type="text/x-template" id="aircraft-display-template"> <!--Aircraft display component template-->
     <div id="checklistCard" v-if="somethingSelected">
       <div class="checklistTitle" >Preflight checklist for your {{selected.name}}:</div>
       <button class="formButton" @click="toggleNewItemForm">+ Add Items</button>
-      <div class="checklistItem" v-for="item in selected.checklistItems" :key="item.id" :class="{checklistItemCompleted: item.completed}"> <!--Need to target specific checklist item to toggle completed?-->
+      <div class="checklistItem" v-for="item in selected.checklistItems" :key="item.id" :class="{checklistItemCompleted: item.completed}"> <!--Creates checklist items and adds strikethrough when checkbox clicked-->
         <input type="checkbox" @click="toggleCompleted(item.id)">
         {{item.name}}</div>
     </div>
-
   </script> 
 
 

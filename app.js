@@ -15,16 +15,16 @@ Vue.createApp({
     }
   },
   methods: {
-    selectCraft(craft) {
+    selectCraft(craft) { //Actions after clicking an existing aircraft sidebar button
       this.selected = craft;
       this.somethingSelected = true;
       this.newCraftFormDisplayed = false;
       this.newItemFormDisplayed = false;
     },
-    toggleNewCraftForm() {
+    toggleNewCraftForm() { //Action after clicking "Add New Aircraft" sidebar button
       this.newCraftFormDisplayed = !this.newCraftFormDisplayed;
     },
-      addNewCraft() {  //TODO: ADD FORM VALIDATION FOR EMPTY ENTRIES
+      addNewCraft() {  //Actions after new aircraft form submission
       if (this.newCraft.name.length) {
         this.newCraft.id = this.aircraftList.length;
         this.aircraftList.push(this.newCraft);
@@ -35,14 +35,13 @@ Vue.createApp({
         this.newCraft = {id: null, name: '', checklistItems: []};
       } 
     },
-    markCompleted(id) {
+    markCompleted(id) { //Action after clicking checkbox for an item, triggers CSS class change
       this.selected.checklistItems[id].completed = !this.selected.checklistItems[id].completed;
-      console.log(id)
     },
-    toggleItemForm() {
+    toggleItemForm() { //Display/hide new item form
       this.newItemFormDisplayed = !this.newItemFormDisplayed;
     },
-    addNewItem() { //TODO: ADD FORM VALIDATION FOR EMPTY ENTRIES
+    addNewItem() {  //Actions after new checklist item form submission
       if (this.newItem.name.length) {
         this.newItem.id = this.selected.checklistItems.length;
         this.selected.checklistItems.push(this.newItem);
@@ -60,8 +59,7 @@ Vue.createApp({
     selected: {type: Object, required: true}
   },
   methods: {
-    toggleCompleted(id) { //NEED TO EMIT?
-      console.log(id)
+    toggleCompleted(id) { 
       this.$emit('item-completed', id)
     },
     toggleNewItemForm() {
