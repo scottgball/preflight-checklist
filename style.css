@@ -1,8 +1,14 @@
 :root {
   --headerColor:rgb(134, 255, 255);
   --sidebarColor: rgb(121, 216, 250);
-  --contentColor: white;
+  --contentColor: rgb(255, 223, 223);
   --borderColor: rgb(169, 169, 169);
+}
+
+@font-face {
+  font-family: 'Questa';
+  src: url('./2_questa_slab_regular_25-webfont.woff2') format('woff2'),
+  url('./2_questa_slab_regular_25-webfont.woff') format('woff');
 }
 
 body {
@@ -22,17 +28,21 @@ body {
 #header {
   grid-area: header;
   background-color: var(--headerColor);
+  color: rgb(91, 81, 150);
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  font-size: larger;
   border-bottom: 3px solid var(--borderColor);
-  padding-left: 4%;
+  padding-left: 3%;
   font-weight: 900;
+  font-family: 'Questa';
 }
 
 #sidebar {
   grid-area: sidebar;
   background-color: var(--sidebarColor);
   border-right: 3px solid var(--borderColor);
+  
   
 }
 
@@ -44,27 +54,45 @@ body {
 .sidebarButton {
   margin-top: 5%;
   padding: 5%;
-  border: none
-}
-
-.addButton {
-
-}
-
-.addButton:hover {
-
-}
-
-.aircraftButton {
+  border: 2px solid var(--sidebarColor);
+  font-family: 'Questa';
+  font-weight: 500;
   
+}
+
+.sidebarButton:hover {
+  border: 2px solid var(--borderColor);
+}
+
+.sidebarButton:active {
+  background-color: var(--borderColor);
+}
+
+#newCraftForm {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.formButton {
+  font-family: 'Questa';
+}
+
+#newCraftInput {
+  font-family: 'Questa';
 }
 
 #content {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   grid-area: content;
   background-color: var(--contentColor);
+  font-family: 'Questa';
+  background-image: url(./sky.jpg);
+  background-size: cover;
+
 }
 
 #checklistCard {
@@ -82,7 +110,11 @@ body {
 }
 
 .checklistTitle {
-  font-weight: 800;
+  margin-bottom: 5%;
+}
+
+.checklistItem {
+  margin-top: 5%;
 }
 
 .checklistItemCompleted {
@@ -96,6 +128,6 @@ body {
 
 .newItemFormHidden {
   visibility: hidden;
-}
+} 
 
 
